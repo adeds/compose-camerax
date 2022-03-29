@@ -1,8 +1,6 @@
 package me.pengj.arcompose
 
-//import coil.compose.rememberImagePainter
 import android.annotation.SuppressLint
-import android.content.Context
 import android.net.Uri
 import android.util.Size
 import androidx.camera.core.CameraSelector
@@ -56,7 +54,13 @@ fun SimpleCameraPreview(
 
     ModalBottomSheetLayout(
         modifier = Modifier.fillMaxSize(),
-        content = mainContent(lifecycleOwner, context, cameraProviderFuture, imageCapture, executor, cameraClick),
+        content = mainContent(
+            lifecycleOwner,
+            cameraProviderFuture,
+            imageCapture,
+            executor,
+            cameraClick
+        ),
         sheetContent = sheetContent(image),
         sheetState = sheetState,
         sheetElevation = 50.dp,
@@ -72,7 +76,6 @@ fun sheetContent(image: Uri?): @Composable() (ColumnScope.() -> Unit) = {
 
 fun mainContent(
     lifecycleOwner: LifecycleOwner,
-    context: Context,
     cameraProviderFuture: ListenableFuture<ProcessCameraProvider>,
     imageCapture: ImageCapture,
     executor: Executor, cameraClick: (ImageCapture, Executor) -> Unit
